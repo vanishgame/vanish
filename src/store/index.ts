@@ -6,9 +6,11 @@ import { IAppState } from "./state"
 import { IAllActions } from "./actions"
 import { grid } from "./reducers/grid"
 import IMazeGeneratorGateway from "../core/gateways/MazeGenerator"
+import IPlayerGateway from "../core/gateways/PlayerGateway"
 
 export interface IAppDependencies {
-	mazeGenerator: IMazeGeneratorGateway
+	mazeGenerator: IMazeGeneratorGateway,
+	playerMovement: IPlayerGateway,
 }
 
 export const configureStore = (dependencies: IAppDependencies) => createStore(

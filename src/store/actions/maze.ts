@@ -1,8 +1,8 @@
-import { IGridState } from "./../state"
+import IGrid from "../../core/models/Grid"
 
 interface IMazeGeneratedAction {
 	type: "MAZE_GENERATED"
-	payload: IGridState
+	payload: IGrid
 }
 
 export type IMazeActions = IMazeGeneratedAction

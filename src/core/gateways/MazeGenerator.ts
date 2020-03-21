@@ -1,7 +1,7 @@
-import { IGridState } from "../../store/state"
+import IGrid from "../../core/models/Grid"
 
 interface IMazeGeneratorGateway {
-	generate(): Promise<IGridState>
+	generate(): Promise<IGrid>
 }
 
 export default IMazeGeneratorGateway
