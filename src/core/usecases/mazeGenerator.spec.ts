@@ -1,10 +1,10 @@
-import { IGridState } from "./../../store/state"
 import { listenToChangedState } from "./../../test.utils"
 import { IAppState } from "../../store/state"
 import { Store } from "redux"
 import { configureStore } from "../../store"
 import { generateMaze } from "./mazeGenerator"
 import InMemoryMazeGenerator from "../../adapters/secondaries/InMemoryMazeGenerator"
+import IGrid from "../models/Grid"
 
 describe("Maze generation", () => {
 	let store: Store<IAppState>
@@ -20,7 +20,7 @@ describe("Maze generation", () => {
 	})
 
 	it("should generate a simple maze", (done) => {
-		const expectedGrid: IGridState = [["1", "2"], ["3", "4"]]
+		const expectedGrid: IGrid = [["1", "2"], ["3", "4"]]
 		listenToChangedState(
 			store,
 			[{
