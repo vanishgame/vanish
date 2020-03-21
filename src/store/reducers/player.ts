@@ -9,7 +9,7 @@ const initialPlayer = {
 
 export const player = (playerData: IAppState["player"] = initialPlayer, action: IAllActions) => {
 	if (action.type === "PLAYER_MOVE") {
-		return playerData
+		return action.payload
 	}
 	return playerData
 }

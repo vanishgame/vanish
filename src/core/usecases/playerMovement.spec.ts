@@ -1,3 +1,4 @@
+import { movePlayer } from "./playerMovement"
 import { listenToChangedState } from "./../../test.utils"
 import { IAppState } from "../../store/state"
 import { Store } from "redux"
@@ -40,11 +41,13 @@ describe("Player movement", () => {
 					index: 1,
 					rules: [{
 						expect: "player.posX",
-						toBe: initialPlayer.posX+1,
+						toBe: initialPlayer.posX + 1,
 					}]
 				}
 			],
-			done()
-			)
+			done,
+		)
+		// tslint:disable-next-line: no-any
+		store.dispatch<any>(movePlayer(initialPlayer))
 	})
 })
