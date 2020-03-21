@@ -9,19 +9,22 @@ export const Grid = () => {
 	const grid: IGridState = useSelector(gridSelector)
 	// tslint:disable-next-line: no-any
 	React.useEffect(() => dispatch<any>(generateMaze()), [])
+
 	if (!grid) {
 		return <p>Loading...</p>
 	}
 
 	return (
 		<table>
-			{
-				grid.map((row, rowIndex) => (
-					<tr key={rowIndex}>
-						{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}
-					</tr>
-				))
-			}
+			<tbody>
+				{
+					grid.map((row, rowIndex) => (
+						<tr key={rowIndex}>
+							{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}
+						</tr>
+					))
+				}
+			</tbody>
 		</table>
 	)
 }
