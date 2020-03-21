@@ -1,4 +1,4 @@
-import { movePlayer } from "./playerMovement"
+import { movePlayer, Direction } from "./playerMovement"
 import { listenToChangedState } from "./../../test.utils"
 import { IAppState } from "../../store/state"
 import { Store } from "redux"
@@ -34,6 +34,7 @@ describe("Player movement", () => {
 	})
 
 	it("should be able to move to the right", (done) => {
+		const direction = Direction.right
 		listenToChangedState(
 			store,
 			[
@@ -48,6 +49,25 @@ describe("Player movement", () => {
 			done,
 		)
 		// tslint:disable-next-line: no-any
-		store.dispatch<any>(movePlayer(initialPlayer))
+		store.dispatch<any>(movePlayer(initialPlayer, direction))
+	})
+
+	it("should be able to move to the left", (done) => {
+		const direction = Direction.left
+		listenToChangedState(
+			store,
+			[
+				{
+					index: 1,
+					rules: [{
+						expect: "player.posX",
+						toBe: initialPlayer.posX - 1,
+					}]
+				}
+			],
+			done,
+		)
+		// tslint:disable-next-line: no-any
+		store.dispatch<any>(movePlayer(initialPlayer, direction))
 	})
 })
