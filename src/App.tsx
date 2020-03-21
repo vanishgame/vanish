@@ -3,15 +3,12 @@ import { Grid } from "./adapters/primaries/grid/grid.component"
 import "./adapters/primaries/styles/index.sass"
 import { Provider } from "react-redux"
 import { configureStore } from "./store"
-import InMemoryMazeGenerator from "./adapters/secondaries/InMemoryMazeGenerator"
-import InMemoryPlayer from "./adapters/secondaries/InMemoryPlayerMovement"
+import InMemoryGameManager from "./adapters/secondaries/InMemoryGameManager"
 
-const mazeGenerator = new InMemoryMazeGenerator()
-const playerMovement = new InMemoryPlayer()
+const gameManager = new InMemoryGameManager()
 
 const store = configureStore({
-	mazeGenerator,
-	playerMovement,
+	gameManager,
 })
 
 const App = () => (

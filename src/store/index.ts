@@ -5,12 +5,10 @@ import thunk, { ThunkMiddleware } from "redux-thunk"
 import { IAppState } from "./state"
 import { IAllActions } from "./actions"
 import { grid } from "./reducers/grid"
-import IMazeGeneratorGateway from "../core/gateways/MazeGenerator"
-import IPlayerGateway from "../core/gateways/PlayerGateway"
+import IGameManagerGateway from "../core/gateways/GameManager"
 
 export interface IAppDependencies {
-	mazeGenerator: IMazeGeneratorGateway,
-	playerMovement: IPlayerGateway,
+	gameManager: IGameManagerGateway,
 }
 
 export const configureStore = (dependencies: IAppDependencies) => createStore(
