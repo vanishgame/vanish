@@ -1,3 +1,5 @@
 import { IAppState } from "./../../../store/state"
 
-export default (state: IAppState) => state.grid
+export const gridSelector = (state: IAppState) => state.grid
+
+export const playerSelector = (state: IAppState) => state.player

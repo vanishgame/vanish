@@ -1,14 +1,37 @@
 import * as React from "react"
-import { IGridState } from "../../../store/state"
 import { useSelector, useDispatch } from "react-redux"
-import gridSelector from "./grid.selector"
+import { gridSelector, playerSelector } from "./grid.selector"
 import { generateMaze } from "../../../core/usecases/mazeGenerator"
+import { movePlayer, Direction } from "../../../core/usecases/playerMovement"
 
 export const Grid = () => {
 	const dispatch = useDispatch()
-	const grid: IGridState = useSelector(gridSelector)
-	// tslint:disable-next-line: no-any
-	React.useEffect(() => dispatch<any>(generateMaze()), [])
+	const grid = useSelector(gridSelector)
+	const player = useSelector(playerSelector)
+
+	React.useEffect(() => {
+		// tslint:disable-next-line: no-any
+		dispatch<any>(generateMaze())
+		const keydownHandler = ({ key }: KeyboardEvent) => {
+			if (["q", "ArrowLeft"].includes(key)) {
+				// tslint:disable-next-line: no-any
+				dispatch<any>(movePlayer(Direction.left))
+			} else if (["d", "ArrowRight"].includes(key)) {
+				// tslint:disable-next-line: no-any
+				dispatch<any>(movePlayer(Direction.right))
+			} else if (["s", "ArrowDown"].includes(key)) {
+				// tslint:disable-next-line: no-any
+				dispatch<any>(movePlayer(Direction.down))
+			} else if (["z", "ArrowUp"].includes(key)) {
+				// tslint:disable-next-line: no-any
+				dispatch<any>(movePlayer(Direction.up))
+			}
+		}
+		window.addEventListener("keydown", keydownHandler)
+		return () => {
+			window.removeEventListener("keydown", keydownHandler)
+		}
+	}, [])
 
 	if (!grid) {
 		return <p>Loading...</p>
@@ -20,7 +43,13 @@ export const Grid = () => {
 				{
 					grid.map((row, rowIndex) => (
 						<tr key={rowIndex}>
-							{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}
+							{
+								row.map((_cell, cellIndex) => (
+									<td key={cellIndex}>
+										{(rowIndex === player.posY && cellIndex === player.posX) ? player.display : "O"}
+									</td>
+								))
+							}
 						</tr>
 					))
 				}

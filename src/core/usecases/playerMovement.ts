@@ -1,5 +1,4 @@
 import { IActionCreator, IDispatch } from "./../../vanish"
-import IPlayer from "../models/Player"
 
 export enum Direction {
 	up = "up",
@@ -8,9 +7,9 @@ export enum Direction {
 	right = "right",
 }
 
-export const movePlayer: IActionCreator = (player: IPlayer, direction: Direction) => {
-	return async (dispatch: IDispatch, _getState, { playerMovement }) => {
-		const updatedPlayer = await playerMovement.move(player, direction)
+export const movePlayer: IActionCreator = (direction: Direction) => {
+	return async (dispatch: IDispatch, _getState, { gameManager }) => {
+		const updatedPlayer = await gameManager.move(direction)
 		dispatch({ type: "PLAYER_MOVE", payload: updatedPlayer })
 	}
 }

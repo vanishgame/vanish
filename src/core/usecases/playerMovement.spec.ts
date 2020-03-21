@@ -3,12 +3,10 @@ import { listenToChangedState } from "./../../test.utils"
 import { IAppState } from "../../store/state"
 import { Store } from "redux"
 import { configureStore } from "../../store"
-// import { generateMaze } from "./mazeGenerator"
-import InMemoryMazeGenerator from "../../adapters/secondaries/InMemoryMazeGenerator"
-// import IGrid from "../models/Grid"
-// import IPlayer from "../models/Player"
 import { expect } from "chai"
-import InMemoryPlayer from "../../adapters/secondaries/InMemoryPlayerMovement"
+
+import InMemoryGameManager from "../../adapters/secondaries/InMemoryGameManager"
+import { generateMaze } from "./mazeGenerator"
 
 const initialPlayer = {
 	posX: 0,
@@ -18,13 +16,13 @@ const initialPlayer = {
 
 describe("Player movement", () => {
 	let store: Store<IAppState>
-	let mazeGenerator: InMemoryMazeGenerator
-	let playerMovement: InMemoryPlayer
+	let gameManager: InMemoryGameManager
 
-	beforeEach(() => {
-		mazeGenerator = new InMemoryMazeGenerator()
-		playerMovement = new InMemoryPlayer()
-		store = configureStore({ mazeGenerator, playerMovement })
+	beforeEach(async () => {
+		gameManager = new InMemoryGameManager()
+		store = configureStore({ gameManager })
+		// tslint:disable-next-line: no-any
+		store.dispatch<any>(generateMaze())
 	})
 
 	it("should be at default position on init", (done) => {
@@ -42,18 +40,17 @@ describe("Player movement", () => {
 					index: 1,
 					rules: [{
 						expect: "player.posX",
-						toBe: initialPlayer.posX + 1,
+						toBe: 1,
 					}]
 				}
 			],
 			done,
 		)
 		// tslint:disable-next-line: no-any
-		store.dispatch<any>(movePlayer(initialPlayer, direction))
+		store.dispatch<any>(movePlayer(direction))
 	})
 
-	it("should be able to move to the left", (done) => {
-		const direction = Direction.left
+	it("shouldn't be able to move to the left while of edge on the maze", (done) => {
 		listenToChangedState(
 			store,
 			[
@@ -61,13 +58,31 @@ describe("Player movement", () => {
 					index: 1,
 					rules: [{
 						expect: "player.posX",
-						toBe: initialPlayer.posX - 1,
+						toBe: 0,
+					}]
+				},
+				{
+					index: 2,
+					rules: [{
+						expect: "player.posX",
+						toBe: 1,
+					}]
+				},
+				{
+					index: 3,
+					rules: [{
+						expect: "player.posX",
+						toBe: 0,
 					}]
 				}
 			],
 			done,
 		)
 		// tslint:disable-next-line: no-any
-		store.dispatch<any>(movePlayer(initialPlayer, direction))
+		store.dispatch<any>(movePlayer(Direction.left))
+		// tslint:disable-next-line: no-any
+		store.dispatch<any>(movePlayer(Direction.right))
+		// tslint:disable-next-line: no-any
+		store.dispatch<any>(movePlayer(Direction.left))
 	})
 })
