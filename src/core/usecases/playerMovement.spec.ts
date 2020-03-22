@@ -40,7 +40,7 @@ describe("Player movement", () => {
 					index: 1,
 					rules: [{
 						expect: "player.posX",
-						toBe: 1,
+						toBe: 9,
 					}]
 				}
 			],
