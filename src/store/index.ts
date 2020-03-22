@@ -1,7 +1,7 @@
 import { player } from "./reducers/player"
 import { createStore, combineReducers, applyMiddleware } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
-import thunk, { ThunkMiddleware, ThunkDispatch } from "redux-thunk"
+import thunk, { ThunkMiddleware, ThunkDispatch, ThunkAction } from "redux-thunk"
 import { IAppState } from "./state"
 import { IAllActions } from "./actions"
 import { grid } from "./reducers/grid"
@@ -22,5 +22,6 @@ export const configureStore = (dependencies: IAppDependencies) => createStore(
 	),
 )
 
-export type ReduxDispatch = ThunkDispatch<IAppState, IAppDependencies, IAllActions>
-export const useReduxDispatch = () => useDispatch<ReduxDispatch>()
+export type IReduxDispatch = ThunkDispatch<IAppState, IAppDependencies, IAllActions>
+export type IAllThunkActions = ThunkAction<void, IAppState, IAppDependencies, IAllActions>
+export const useReduxDispatch = () => useDispatch<IReduxDispatch>()
