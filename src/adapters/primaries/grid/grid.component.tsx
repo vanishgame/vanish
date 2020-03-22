@@ -1,30 +1,26 @@
 import * as React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { gridSelector, playerSelector } from "./grid.selector"
 import { generateMaze } from "../../../core/usecases/mazeGenerator"
 import { movePlayer, Direction } from "../../../core/usecases/playerMovement"
+import { useReduxDispatch } from "../../../store"
 
 export const Grid = () => {
-	const dispatch = useDispatch()
+	const dispatch = useReduxDispatch()
 	const grid = useSelector(gridSelector)
 	const player = useSelector(playerSelector)
 
 	React.useEffect(() => {
-		// tslint:disable-next-line: no-any
-		dispatch<any>(generateMaze())
+		dispatch(generateMaze())
 		const keydownHandler = ({ key }: KeyboardEvent) => {
 			if (["q", "ArrowLeft"].includes(key)) {
-				// tslint:disable-next-line: no-any
-				dispatch<any>(movePlayer(Direction.left))
+				dispatch(movePlayer(Direction.left))
 			} else if (["d", "ArrowRight"].includes(key)) {
-				// tslint:disable-next-line: no-any
-				dispatch<any>(movePlayer(Direction.right))
+				dispatch(movePlayer(Direction.right))
 			} else if (["s", "ArrowDown"].includes(key)) {
-				// tslint:disable-next-line: no-any
-				dispatch<any>(movePlayer(Direction.down))
+				dispatch(movePlayer(Direction.down))
 			} else if (["z", "ArrowUp"].includes(key)) {
-				// tslint:disable-next-line: no-any
-				dispatch<any>(movePlayer(Direction.up))
+				dispatch(movePlayer(Direction.up))
 			}
 		}
 		window.addEventListener("keydown", keydownHandler)
