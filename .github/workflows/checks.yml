@@ -17,8 +17,8 @@ jobs:
         with:
           node-version: "10.x"
       - name: Installing packages
-	  - run: npm install
+      - run: npm install
       - name: Tests
-	  - run: npm test
+      - run: npm test
       - name: Linting and compilation
       - run: npm run check
