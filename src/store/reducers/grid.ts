@@ -1,7 +1,7 @@
 import { IAllActions } from "./../actions"
-import { IGridState } from "../state"
+import { IAppState } from "../state"
 
-export const grid = (gridData: IGridState = null, action: IAllActions) => {
+export const grid = (gridData: IAppState["grid"] = null, action: IAllActions) => {
 	if (action.type === "MAZE_GENERATED") {
 		return action.payload
 	}
