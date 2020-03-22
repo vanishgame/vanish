@@ -8,17 +8,18 @@ on:
 
 jobs:
   build:
+    name: Checks
     runs-on: ubuntu-16.04
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: "10.x"
       - name: Installing packages
-      - run: npm install
+        run: npm install
       - name: Tests
-      - run: npm test
+        run: npm test
       - name: Linting and compilation
-      - run: npm run check
+        run: npm run check
