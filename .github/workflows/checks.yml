@@ -1,0 +1,24 @@
+name: Checks
+
+on:
+  push:
+    branches: "**"
+  pull_request:
+    branches: "**"
+
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - name: Installing packages
+        run: npm install
+      - name: Tests
+        run: npm test
+      - name: Linting and compilation
+        run: npm run check
