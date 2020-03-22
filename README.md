@@ -13,22 +13,22 @@
 ## Roadmap
 
 ### Version 1
-1. Player `movement`
-1. `Win` check
-1. `Monsters` and `holes` generation
-1. `Hints` generation
-1. `Death` check
-1. `Layout` and `menu` for the game
-1. Ability to `shoot` at monsters
-1. Make the game `pretty`
-1. Make auto deployment on `master` branch push
+- [x] Player `movement`
+- [ ] `Win` check
+- [ ] `Monsters` and `holes` generation
+- [ ] `Hints` generation
+- [ ] `Death` check
+- [ ] `Layout` and `menu` for the game
+- [ ] Ability to `shoot` at monsters
+- [ ] Make the game `pretty`
+- [x] Make auto deployment on `master` branch push
 
 ### Version 2
-1. Make the game `multi-level`
-1. Add a `backend` that replaces all InMemorys
-1. Add a way of `logging in`
-1. Add `score saving`
-1. Add `realtime fight`
+- [ ] Make the game `multi-level`
+- [ ] Add a `backend` that replaces all InMemorys
+- [ ] Add a way of `logging in`
+- [ ] Add `score saving`
+- [ ] Add `realtime fight`
 
 ## Ideas
 - Multiplayer
